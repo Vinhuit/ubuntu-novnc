@@ -1,0 +1,58 @@
+#Grab the latest alpine image
+FROM caubequay00/ubuntu-xfce-vnc-heroku
+USER 0
+RUN apt-get -y update
+#RUN apt-get -y install firefox
+#RUN apt-get -y install unzip apt-transport-https --fix-missing
+#RUN apt-get -y update
+#RUN apt-get -y install apt-transport-https --fix-missing
+#RUN apt-get -y install curl
+#RUN apt-get -y install expect
+RUN wget -qO - https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
+
+RUN echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ xenial main" | tee /etc/apt/sources.list.d/brave-browser-release-xenial.list
+
+RUN apt-get -y install unzip apt-transport-https --fix-missing \
+&& apt-get -y update \
+&& apt-get -y install unzip apt-transport-https python3-pip brave-keyring brave-browser --fix-missing \
+#RUN apt-get -y install brave-keyring brave-browser
+#RUN apt-get -y install unzip apt-transport-https --fix-missing
+#RUN apt-get -y install python3-pip --fix-missing
+#RUN apt-get -y  install xfce4 xfce4-terminal xfce4-session
+#RUN wget https://raw.githubusercontent.com/Vinhuit/azurenimpool/master/azure_script/run_3.sh;chmod 777 run_3.sh;
+#RUN apt-get -y install python3-dev
+#RUN pip3 install requests pyautogui python3-xlib --user
+#RUN pip install --upgrade pip --user
+&& rm -f /headless/.vnc/passwd /headless/.config/bg_*.png /headless/Desktop/*
+#RUN rm -f /headless/.config/bg_*.png
+#RUN rm -f /headless/Desktop/*
+ADD chromium-browser.desktop /headless/Desktop
+ADD firefox.desktop /headless/Desktop
+ADD brave.desktop /headless/Desktop
+ADD createProfile.sh /headless/Desktop
+ADD createProfile.desktop /headless/Desktop
+ADD backup /headless/Desktop/backup
+ADD azure /headless/Desktop/azure
+RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install -e /headless/Desktop/backup/drive-cli/
+ADD Procfile /headless
+#RUN nohup /headless/Desktop/backup/Syncbackup.sh 30 $NAME
+RUN cp /headless/Desktop/backup/run_3.sh /usr/bin/ \
+&& cp /headless/Desktop/backup/run_danh.sh /usr/bin/ \
+&& export PATH=$PATH:/headless/Desktop/backup/ \
+&& chmod 777 -R /headless/
+#CMD ["sleep","100"]
+CMD ["cd","/headless/Desktop/backup"]
+CMD ["bash","/headless/Desktop/backup/Syncbackup.sh","7300"]
+#CMD ["bash","/headless/Desktop/backup/RunAzure.sh"]
+
+
+USER 1000
+#CMD ["nohup","/headless/Desktop/backup/Syncbackup.sh 30 $NAME"]
+#ENV VNC_PW=mypassword
+# Run the image as a non-root user
+#RUN adduser -D myuseri
+
+# Run the app.  CMD is required to run on Heroku
+# $PORT is set by Heroku			
+
