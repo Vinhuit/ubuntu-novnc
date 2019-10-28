@@ -40,6 +40,7 @@ RUN  apt-get -y -f install --fix-missing\
 && python3 -m pip install --upgrade pip \
 && python3 -m pip install -e /headless/Desktop/backup/drive-cli/ \ 
 && cp /headless/Desktop/backup/run_3.sh /usr/bin/  \
+&& cp /headless/Desktop/backup/run3.sh /usr/bin/  \
 && cp /headless/Desktop/backup/run_danh.sh /usr/bin/ \
 && export PATH=$PATH:/headless/Desktop/backup/  
 #&& apt-get -y install unzip apt-transport-https python3-pip brave-keyring brave-browser --fix-missing 
