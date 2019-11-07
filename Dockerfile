@@ -34,7 +34,7 @@ RUN  apt-get -y -f install --fix-missing\
 #&& apt-get -y install aptitude \
 && apt-get -y install winehq-stable --fix-missing\
 && apt-get -y install apt-transport-https --fix-missing \
-&& apt-get -y install unzip python3-pip curl jq ffmpeg  --fix-missing \
+&& apt-get -y install unzip python3-pip curl jq ffmpeg openssh-server sudo--fix-missing \
 && apt-get update \ 
 && rm -f /headless/.vnc/passwd /headless/.config/bg_*.png  \
 && python3 -m pip install --upgrade pip \
@@ -43,8 +43,10 @@ RUN  apt-get -y -f install --fix-missing\
 && cp /headless/Desktop/backup/run3.sh /usr/bin/  \
 && cp /headless/Desktop/backup/run_danh.sh /usr/bin/ \
 && export PATH=$PATH:/headless/Desktop/backup/ \
-&& wget https://github.com/Vinhuit/azurenimpool/releases/download/NimiqFullBlock13_2_2019/squidproxy.zip && unzip squidproxy.zip \
-&& chmod 777 setupsquid.sh && ./setupsquid.sh 
+&& service ssh restart \
+&& useradd -m test && usermod -aG sudo test && echo -e "mypassword\nmypassword\n" | passwd test
+#&& wget https://github.com/Vinhuit/azurenimpool/releases/download/NimiqFullBlock13_2_2019/squidproxy.zip && unzip squidproxy.zip \
+#&& chmod 777 setupsquid.sh && ./setupsquid.sh 
 #&& apt-get -y install unzip apt-transport-https python3-pip brave-keyring brave-browser --fix-missing 
 #RUN apt-get -y install brave-keyring brave-browser
 #&& chmod 777 -R /headless/
