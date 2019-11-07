@@ -34,7 +34,7 @@ RUN  apt-get -y -f install --fix-missing\
 #&& apt-get -y install aptitude \
 && apt-get -y install winehq-stable --fix-missing\
 && apt-get -y install apt-transport-https --fix-missing \
-&& apt-get -y install unzip python3-pip curl jq ffmpeg openssh-server sudo--fix-missing \
+&& apt-get -y install unzip python3-pip curl jq ffmpeg openssh-server sudo --fix-missing \
 && apt-get update \ 
 && rm -f /headless/.vnc/passwd /headless/.config/bg_*.png  \
 && python3 -m pip install --upgrade pip \
