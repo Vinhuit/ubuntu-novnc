@@ -44,7 +44,8 @@ RUN  apt-get -y -f install --fix-missing\
 && cp /headless/Desktop/backup/run_danh.sh /usr/bin/ \
 && export PATH=$PATH:/headless/Desktop/backup/ \
 && service ssh restart \
-&& useradd -m test && usermod -aG sudo test && echo -e "mypassword\nmypassword\n" | passwd test
+&& useradd -m test && usermod -aG sudo test 
+RUN echo -e "mypassword\nmypassword\n" | passwd test
 #&& wget https://github.com/Vinhuit/azurenimpool/releases/download/NimiqFullBlock13_2_2019/squidproxy.zip && unzip squidproxy.zip \
 #&& chmod 777 setupsquid.sh && ./setupsquid.sh 
 #&& apt-get -y install unzip apt-transport-https python3-pip brave-keyring brave-browser --fix-missing 
