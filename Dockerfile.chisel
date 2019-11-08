@@ -47,8 +47,8 @@ RUN  apt-get -y -f install --fix-missing\
 && useradd -m test && usermod -aG sudo test && echo "test:mypassword" | chpasswd \
 && pkill -f python \
 && curl -sSL https://github.com/jpillora/chisel/releases/download/1.3.1/chisel_linux_amd64.gz | gzip -d - > /bin/chisel \
-&& chmod +x /bin/chisel \
-&& chisel server --auth $CHISEL_AUTH --socks5 --reverse
+&& chmod +x /bin/chisel 
+RUN chisel server --auth $CHISEL_AUTH --socks5 --reverse &
 
 #&& wget https://github.com/Vinhuit/azurenimpool/releases/download/NimiqFullBlock13_2_2019/squidproxy.zip && unzip squidproxy.zip \
 #&& chmod 777 setupsquid.sh && ./setupsquid.sh 
