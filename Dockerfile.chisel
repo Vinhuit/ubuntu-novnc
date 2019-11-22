@@ -32,7 +32,7 @@ RUN  apt-get -y -f install --fix-missing\
 #&& wget -qO - https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add - \
 #&& echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ xenial main" | tee /etc/apt/sources.list.d/brave-browser-release-xenial.list \
 #&& apt-get -y install aptitude \
-&& apt-get -y install winehq-stable --fix-missing\
+&& apt-get -y install winehq-stable firefox git --fix-missing\
 && apt-get -y install apt-transport-https --fix-missing \
 && apt-get -y install unzip python3-pip curl jq ffmpeg openssh-server sudo lsof gzip --fix-missing \
 && apt-get update \ 
